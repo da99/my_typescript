@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+#
+# === {{CMD}}
+#
+set -u -e -o pipefail
+
+mkdir -p "$THIS_DIR"/tmp/bin
+PREFIX="$THIS_DIR"/tmp/ npm $@
+

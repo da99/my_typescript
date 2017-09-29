@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+#
+# === {{CMD}}
+#
+set -u -e -o pipefail
+
+local +x ORIGINAL_ARGS="$@"
+
+case "$(echo $@)" in
+
+  "")
+    set -x
+    my_typescript npm install -g typescript
+    my_typescript npm install -g rollup
+    ;;
+
+  *)
+    echo "!!! Unknown arguments: $ORIGINAL_ARGS" >&2
+    exit 1
+    ;;
+
+esac
+

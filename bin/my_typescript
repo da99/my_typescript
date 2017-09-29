@@ -12,6 +12,7 @@ fi
 local +x THE_ARGS="$@"
 local +x THIS_DIR="$(dirname "$(dirname "$(realpath "$0")")")"
 PATH="$PATH:$THIS_DIR/bin"
+PATH="$PATH:$THIS_DIR/tmp/bin"
 PATH="$PATH:$THIS_DIR/../process/bin"
 PATH="$PATH:$THIS_DIR/../sh_color/bin"
 
@@ -29,15 +30,7 @@ case $ACTION in
       exit 0
     fi
 
-    if [[ -f "$THIS_DIR/progs/bin/$ACTION" ]]; then
-      export PATH="$THIS_DIR/progs/bin:$PATH"
-      "$THIS_DIR"/progs/bin/$ACTION "$@"
-      exit 0
-    fi
-
-    # === It's an error:
-    echo "!!! Unknown action: $ACTION" 1>&2
-    exit 1
+    $ACTION $@
     ;;
 
 esac

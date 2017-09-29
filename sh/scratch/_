@@ -23,8 +23,12 @@ case "$ACTION" in
 
   run)
     cd "$THIS_DIR"/tmp/scratch
-    tsc scratch.ts
-    node scratch.js
+    sh_color ORANGE "=== {{Compiling}}..."
+    tsc scratch.ts --outDir "$THIS_DIR"/tmp
+    rollup "$THIS_DIR"/tmp/scratch.js --o "$THIS_DIR"/tmp/scratch.bundle.js --f cjs
+    sh_color ORANGE "=== {{Running}}..."
+    node ../scratch.bundle.js
+    sh_color GREEN "=== {{DONE}} ==="
     ;;
 
   *)
